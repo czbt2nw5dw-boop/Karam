@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>عرض الدرس</title>
+<link rel="icon" href="logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:Cairo,system-ui,sans-serif;background:#0b2f2b;color:#fff;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px}
+.top a{background:rgba(255,255,255,.12);border-radius:10px;padding:6px 12px;font-size:14px;color:#fff;text-decoration:none}
+.top b{font-size:15px}
+.track{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.s{flex:0 0 100%;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 16px;gap:10px}
+.s img{width:100%;max-width:1100px;max-height:78vh;object-fit:contain;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.35);background:#000}
+.s a.v{background:#e8901c;color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:8px 18px;font-size:14px}
+.bar{display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 16px 18px}
+.bar button{width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px}
+#n{min-width:70px;text-align:center;font-weight:700}
+.hint{text-align:center;font-size:12px;opacity:.6;padding-bottom:8px}
+</style>
+</head>
+<body>
+<div class="top"><b>جابر العيش... كرمٌ لا ينقطع</b><a href="index.html">الرئيسية</a></div>
+<div class="track" id="t"></div>
+<div class="bar"><button id="nx" aria-label="التالي">‹</button><span id="n">1 من 17</span><button id="pv" aria-label="السابق">›</button></div>
+<p class="hint">اسحب لتقليب الشرائح · المحطات التفاعلية في «لعبة سوق جابر العيش»</p>
+<script>
+var N=17,t=document.getElementById('t'),extra={4:['media/lesson.mp4','شغّل فيديو الدرس'],15:['media/initiative.mp4','شغّل فيديو المبادرة'],3:['game.html#s1','افتح المحطة'],5:['game.html#s2','افتح المحطة'],8:['game.html#s3','افتح المحطة'],9:['game.html#s4','افتح المحطة'],10:['game.html#s5','افتح المحطة'],11:['game.html#s6','افتح المحطة'],12:['game.html#s7','افتح المحطة'],14:['game.html#s8','افتح المحطة']};
+for(var i=1;i<=N;i++){var d=document.createElement('div');d.className='s';var p=('0'+i).slice(-2);
+d.innerHTML='<img loading="'+(i<3?'eager':'lazy')+'" src="slides/s-'+p+'.jpg" alt="شريحة '+i+'">'+(extra[i]?'<a class="v" href="'+extra[i][0]+'">'+extra[i][1]+'</a>':'');t.appendChild(d)}
+function cur(){return Math.round(Math.abs(t.scrollLeft)/t.clientWidth)}
+t.addEventListener('scroll',function(){document.getElementById('n').textContent=(cur()+1)+' من '+N},{passive:true});
+function go(k){t.scrollTo({left:-(k*t.clientWidth),behavior:'smooth'})}
+document.getElementById('nx').onclick=function(){go(Math.min(N-1,cur()+1))};
+document.getElementById('pv').onclick=function(){go(Math.max(0,cur()-1))};
+document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')go(Math.min(N-1,cur()+1));if(e.key==='ArrowRight')go(Math.max(0,cur()-1))});
+</script>
+</body>
+</html>
