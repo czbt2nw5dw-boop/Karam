@@ -333,7 +333,7 @@ const qs=[['الشيخ جابر بن عبدالله الصباح هو حاكم �
 let qi=0;
 function renderQ(){const q=qs[qi];$('#qnum').textContent=`السؤال ${qi+1} من ${qs.length}`;$('#qtext').textContent=q[0];
   $('#qopts').innerHTML='';q[1].forEach((o,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=o;
-  b.onclick=()=>{$$('#qopts .opt').forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add('ok')});if(i!==q[2])b.classList.add('bad')};$('#qopts').appendChild(b)});
+  b.onclick=()=>{if(i===q[2]){b.classList.add('ok');$$('#qopts .opt').forEach(x=>x.disabled=true)}else{b.classList.add('bad');b.disabled=true}};$('#qopts').appendChild(b)});
   $('#qnext').textContent=qi===qs.length-1?'من البداية':'السؤال التالي'}
 $('#qnext').onclick=()=>{qi=(qi+1)%qs.length;renderQ()};renderQ();
 const teams=['مجلس القبلة','مجلس شرق','مجلس المرقاب','مجلس الفنطاس','مجلس دسمان','مجلس المباركية','مجلس الجهراء'];let pts=teams.map(()=>0);
