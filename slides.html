@@ -33,7 +33,7 @@ body{font-family:Cairo,system-ui,sans-serif;background:#0b2f2b;color:#fff;displa
 <script>
 var N=17,t=document.getElementById('t'),extra={4:['media/lesson.mp4','شغّل فيديو الدرس'],15:['media/initiative.mp4','شغّل فيديو المبادرة'],3:['game.html#s1','افتح المحطة'],5:['game.html#s2','افتح المحطة'],8:['game.html#s3','افتح المحطة'],9:['game.html#s4','افتح المحطة'],10:['game.html#s5','افتح المحطة'],11:['game.html#s6','افتح المحطة'],12:['game.html#s7','افتح المحطة'],14:['game.html#s8','افتح المحطة']};
 for(var i=1;i<=N;i++){var d=document.createElement('div');d.className='s';var p=('0'+i).slice(-2);
-d.innerHTML='<img loading="'+(i<3?'eager':'lazy')+'" src="slides/s-'+p+'.jpg?v=4" alt="شريحة '+i+'">'+(extra[i]?'<a class="v" href="'+extra[i][0]+'">'+extra[i][1]+'</a>':'');t.appendChild(d)}
+d.innerHTML='<img loading="'+(i<3?'eager':'lazy')+'" src="slides/s-'+p+'.jpg?v=5" alt="شريحة '+i+'">'+(extra[i]?'<a class="v" href="'+extra[i][0]+'">'+extra[i][1]+'</a>':'');t.appendChild(d)}
 function cur(){return Math.round(Math.abs(t.scrollLeft)/t.clientWidth)}
 t.addEventListener('scroll',function(){document.getElementById('n').textContent=(cur()+1)+' من '+N},{passive:true});
 function go(k){t.scrollTo({left:-(k*t.clientWidth),behavior:'smooth'})}
