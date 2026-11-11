@@ -218,8 +218,7 @@ input[type=text]{font:inherit;padding:10px 14px;border-radius:12px;border:2px so
     <section data-st="6" data-name="نشاط 3: ماذا لو؟" data-min="7" hidden>
       <div class="eyebrow">نشاط (3)</div>
       <h2>إذا رأيت صديقاً يحتاج مساعدة، كيف تتصرف؟</h2>
-      <button class="btn alt" id="drawSit">اسحب موقفاً</button>
-      <div class="situation" id="sit">اضغط «اسحب موقفاً»</div>
+      <div class="situation" id="sit">زميلك نسي أكله ويبدو جائعاً</div>
       <p class="hint">فكّر في الموقف بالقبعات الست:</p>
       <div class="hats" id="hats"></div>
       <div class="hat-msg" id="hatMsg" aria-live="polite">اختر قبعة.</div>
@@ -337,7 +336,7 @@ function renderQ(){const q=qs[qi];$('#qnum').textContent=`السؤال ${qi+1} �
   b.onclick=()=>{$$('#qopts .opt').forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add('ok')});if(i!==q[2])b.classList.add('bad')};$('#qopts').appendChild(b)});
   $('#qnext').textContent=qi===qs.length-1?'من البداية':'السؤال التالي'}
 $('#qnext').onclick=()=>{qi=(qi+1)%qs.length;renderQ()};renderQ();
-const teams=['مجلس القبلة','مجلس شرق','مجلس المرقاب','مجلس الفنطاس','مجلس دسمان','مجلس المباركية'];let pts=teams.map(()=>0);
+const teams=['مجلس القبلة','مجلس شرق','مجلس المرقاب','مجلس الفنطاس','مجلس دسمان','مجلس المباركية','مجلس الجهراء'];let pts=teams.map(()=>0);
 function renderTeams(){$('#teams').innerHTML='';teams.forEach((t,i)=>{const d=document.createElement('div');d.className='team';
   d.innerHTML=`<span>${t}</span><span class="row" style="gap:6px"><button aria-label="أنقص نقطة">−</button><span class="pts">${pts[i]}</span><button aria-label="أضف نقطة">+</button></span>`;
   const [m,p]=d.querySelectorAll('button');m.onclick=()=>{pts[i]=Math.max(0,pts[i]-1);renderTeams()};p.onclick=()=>{pts[i]++;renderTeams()};$('#teams').appendChild(d)})}
@@ -359,11 +358,8 @@ $('#sortCheck').onclick=()=>{let ok=0;[...$('#sortCards').children].forEach((c,i
 $('#sortReset').onclick=()=>{picks={};renderSort()};renderSort();
 
 /* activity 3 */
-const sits=['زميلك نسي فطوره ويبدو جائعاً','طالب جديد في الفصل لا يعرف أحداً','زميلك انكسر قلمه قبل الاختبار','جارك كبير في السن يحمل أغراضاً ثقيلة','عامل المدرسة يعمل في حر الظهيرة','صديقك لم يفهم درس الرياضيات'];
-let lastSit=-1;
-$('#drawSit').onclick=()=>{let i;do{i=Math.floor(Math.random()*sits.length)}while(i===lastSit&&sits.length>1);lastSit=i;$('#sit').textContent=sits[i];$('#hatMsg').textContent='اختر قبعة.'};
-const hats=[['الأبيض','#f4f4f4','المعلومات: ما الذي نعرفه عن هذا الموقف؟'],['الأحمر','#e8574a','المشاعر: بماذا يشعر صديقك؟ وبماذا تشعر أنت؟'],['الأسود','#3b3b3b','الحذر: كيف نساعد دون أن نجرح مشاعره أو نحرجه؟'],['الأصفر','#f6c945','الإيجابيات: ما الفائدة التي تعود عليه وعليك من المساعدة؟'],['الأخضر','#5cb85c','الحلول: اقترح ثلاث طرق مختلفة للمساعدة.'],['الأزرق','#4a90d9','القرار: ما أفضل تصرف؟ ولماذا اخترته؟']];
-hats.forEach(h=>{const b=document.createElement('button');b.className='hat';b.textContent='القبعة '+h[0];b.style.background=h[1];if(h[0]==='الأسود')b.style.color='#fff';
+const hats=[['الزرقاء','#1f3a5a','ننظّم: ما خطوتنا الأولى؟'],['الصفراء','#e8b923','ما الفائدة لو ساعدناه؟'],['البيضاء','#ffffff','ما الحقائق؟ ماذا يحتاج صديقي؟'],['الخضراء','#2e7d4f','أفكار جديدة للمساعدة'],['السوداء','#26262a','ما الذي قد يُحرجه؟ كيف نتجنبه؟'],['الحمراء','#c0392b','بماذا يشعر صديقي؟ وبماذا أشعر؟']];
+hats.forEach(h=>{const b=document.createElement('button');b.className='hat';b.textContent='القبعة '+h[0];b.style.background=h[1];if(h[0]!=='البيضاء'&&h[0]!=='الصفراء')b.style.color='#fff';
   b.onclick=()=>{$('#hatMsg').textContent='القبعة '+h[0]+' · '+h[2];$('#hatMsg').style.borderRightColor=h[1]};$('#hats').appendChild(b)});
 
 /* activity 4 poster */
